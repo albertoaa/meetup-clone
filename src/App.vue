@@ -1,8 +1,12 @@
 <template>
   <v-app toolbar>
-    <v-navigation-drawer absolute persistent v-model="sideNav">
+    <v-navigation-drawer absolute temporary v-model="sideNav">
       <v-list>
-        <v-list-tile v-for="item in menuItems" :key="item.title">
+        <v-list-tile
+          v-for="item in menuItems"
+          :key="item.title"
+          :to="item.link"
+        >
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -17,17 +21,24 @@
       class="hidden-sm-and-up">
 
       </v-toolbar-side-icon>
-      <v-toolbar-title>DevMeetup</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat v-for="item in menuItems" :key="item.title">
+        <v-btn
+          flat
+          v-for="item in menuItems"
+          :key="item.title"
+          :to="item.link"
+        >
           <v-icon left dark>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <main>
-
+      <router-view></router-view>
     </main>
 
   </v-app>
@@ -41,23 +52,28 @@
         menuItems: [
           {
             icon: 'supervisor_account',
-            title: 'View Meetups'
+            title: 'View Meetups',
+            link: '/meetups'
           },
           {
             icon: 'room',
-            title: 'Organize Meetups'
+            title: 'Organize Meetups',
+            link: '/meetup/new'
           },
           {
             icon: 'person',
-            title: 'Profile'
+            title: 'Profile',
+            link: '/user/profile'
           },
           {
             icon: 'face',
-            title: 'Sign up'
+            title: 'Sign up',
+            link: '/user/signup'
           },
           {
             icon: 'lock_open',
-            title: 'Sign in'
+            title: 'Sign in',
+            link: '/user/signin'
           }
         ]
 
